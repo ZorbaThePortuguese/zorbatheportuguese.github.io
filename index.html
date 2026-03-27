@@ -1,75 +1,99 @@
-<html>
+ <html>
+
   <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
+
     <script>
+
+      // 1. Create the click handler component
+
       AFRAME.registerComponent('click-handler', {
+
         init: function () {
-          // Listen for both click and fuse (for some mobile browsers)
+
           this.el.addEventListener('click', () => {
-            alert("Click detected! Redirecting...");
+
+            // Change this to your desired URL
+
             window.location.href = "https://www.google.com";
+
           });
+
         }
+
       });
+
     </script>
-    <style>
-      /* Ensure the canvas is the top-most interactive element */
-      .a-canvas {
-        z-index: 10;
-      }
-      #overlay {
-      position: fixed;          /* Fica fixo no ecrã, independente do scroll */
-      top: 20px;                /* 20px abaixo do topo */
-      left: 50%;                /* Começa a 50% da largura */
-      transform: translateX(-50%); /* Centra horizontalmente */
-      z-index: 999;             /* Fica sempre por cima de todos os outros elementos */
-      background: rgba(0,0,0,0.75); /* Fundo preto semi-transparente */
-      color: #00B4D8;           /* Texto azul ciano */
-      padding: 10px 20px;       /* Espaçamento interno */
-      border-radius: 20px;      /* Cantos arredondados */
-      font-family: sans-serif;  /* Fonte sem serifas */
-      font-size: 14px;
-      text-align: center;
-      transition: all 0.3s;     /* Animação suave em todas as propriedades ao mudar de estado */
-    }
-    </style>
+
   </head>
+
   <body>
-    <div id="overlay">📷 Aponte a câmara para o target</div>
+
     <a-scene 
+
       mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes;" 
+
       color-space="sRGB" 
+
       renderer="colorManagement: true, lightingPBR: true" 
+
       vr-mode-ui="enabled: false" 
+
       device-orientation-permission-ui="enabled: false"
+
+      /* 2. Add raycaster to the scene so it can detect clicks */
+
       cursor="rayOrigin: mouse"
+
       raycaster="objects: .clickable">
 
+
       <a-assets>
+
+        <img id="card" src="cenario-img.jpg" />
+
         <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
+
       </a-assets>
+
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+
       <a-entity mindar-image-target="targetIndex: 0">
+
         <a-gltf-model 
+
+          id="my-avatar"
+
           src="#avatarModel" 
+
           rotation="0 0 0" 
+
           position="0 0 0" 
-          scale="0.05 0.05 0.05">
+
+          scale="0.05 0.05 0.05"
+
+          /* 3. Add the component and the 'clickable' class */
+
+          class="clickable"
+
+          click-handler
+
+          animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+
         </a-gltf-model>
 
-        <a-box
-          class="clickable"
-          click-handler
-          position="0 0 0"
-          scale="1 1 1" 
-          material="color: red; opacity: 0.5; transparent: true">
-        </a-box>
       </a-entity>
+
     </a-scene>
+
   </body>
-</html>
+
+</html> 

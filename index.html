@@ -20,9 +20,25 @@
       .a-canvas {
         z-index: 10;
       }
+      #overlay {
+      position: fixed;          /* Fica fixo no ecrã, independente do scroll */
+      top: 20px;                /* 20px abaixo do topo */
+      left: 50%;                /* Começa a 50% da largura */
+      transform: translateX(-50%); /* Centra horizontalmente */
+      z-index: 999;             /* Fica sempre por cima de todos os outros elementos */
+      background: rgba(0,0,0,0.75); /* Fundo preto semi-transparente */
+      color: #00B4D8;           /* Texto azul ciano */
+      padding: 10px 20px;       /* Espaçamento interno */
+      border-radius: 20px;      /* Cantos arredondados */
+      font-family: sans-serif;  /* Fonte sem serifas */
+      font-size: 14px;
+      text-align: center;
+      transition: all 0.3s;     /* Animação suave em todas as propriedades ao mudar de estado */
+    }
     </style>
   </head>
   <body>
+    <div id="overlay">📷 Aponte a câmara para o target</div>
     <a-scene 
       mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes;" 
       color-space="sRGB" 

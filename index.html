@@ -49,36 +49,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
     </script>
 <style>
- #overall-div {
-      display: none;
-      position: fixed;          
-      top: 20px;               
-      left: 50%;                
-      transform: translateX(-50%); 
-      z-index: 999;             
-    }
- #overlay{
-      background: none; 
-      color: #FFFFFF;
-      text-decoration: none;
-      border: #FFFFFF 5px solid;  
-      padding: 10px 20px;      
-      border-radius: 20px;      
-      font-family: sans-serif;  
-      font-size: 14px;
-      text-align: center;
-      transition: all 0.3s;     
- }
- #overlay-a{
-   background: none; 
-   color: #FFFFFF;
-   text-decoration: none;
- }
+#overall-div {
+  display: none; /* This keeps it hidden initially */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+#overlay {
+  display: inline-block; /* This defines how it looks ONCE shown */
+  background: none; 
+  color: #FFFFFF;
+  text-decoration: none;
+  border: #FFFFFF 5px solid;  
+  padding: 10px 20px;      
+  border-radius: 20px;      
+  font-family: sans-serif;  
+  transition: all 0.3s;     
+}
 </style>
   </head>
 
   <body>
-<div id="overall-div"> <button id="overlay"> <a href="" id="overlay-a"> More Information </a> </button></div>
+<div id="overall-div">
+  <a href="https://www.google.com" id="overlay">More Information</a>
+</div>
     <a-scene
 
       mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes; alpha: true;" 

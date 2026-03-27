@@ -3,27 +3,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <script>
+      // 1. Create the click handler component
+      AFRAME.registerComponent('click-handler', {
+        init: function () {
+          this.el.addEventListener('click', () => {
+            // Change this to your desired URL
+            window.location.href = "https://www.google.com";
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <a-scene 
-  mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes;" 
-  color-space="sRGB" 
-  renderer="colorManagement: true, lightingPBR: true" 
-  vr-mode-ui="enabled: false" 
-  device-orientation-permission-ui="enabled: false">
+      mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, lightingPBR: true" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false"
+      /* 2. Add raycaster to the scene so it can detect clicks */
+      cursor="rayOrigin: mouse"
+      raycaster="objects: .clickable">
+
       <a-assets>
         <img id="card" src="cenario-img.jpg" />
         <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model 
-    src="#avatarModel" 
-    rotation="0 0 0" 
-    position="0 0 0" 
-    scale="0.05 0.05 0.05" 
-    animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> </a-gltf-model>
+          id="my-avatar"
+          src="#avatarModel" 
+          rotation="0 0 0" 
+          position="0 0 0" 
+          scale="0.05 0.05 0.05"
+          /* 3. Add the component and the 'clickable' class */
+          class="clickable"
+          click-handler
+          animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+        </a-gltf-model>
       </a-entity>
     </a-scene>
   </body>

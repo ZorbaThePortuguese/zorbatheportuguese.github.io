@@ -5,11 +5,11 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
     <script>
-      // 1. Create the click handler component
+      // Register the click handler BEFORE the scene loads
       AFRAME.registerComponent('click-handler', {
         init: function () {
           this.el.addEventListener('click', () => {
-            // Change this to your desired URL
+            console.log("Target clicked! Redirecting...");
             window.location.href = "https://www.google.com";
           });
         }
@@ -22,15 +22,14 @@
       color-space="sRGB" 
       renderer="colorManagement: true, lightingPBR: true" 
       vr-mode-ui="enabled: false" 
-      device-orientation-permission-ui="enabled: false"
-      /* 2. Add raycaster to the scene so it can detect clicks */
-      cursor="rayOrigin: mouse"
-      raycaster="objects: .clickable">
+      device-orientation-permission-ui="enabled: false">
 
       <a-assets>
         <img id="card" src="cenario-img.jpg" />
         <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
       </a-assets>
+
+      <a-entity cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -41,11 +40,16 @@
           rotation="0 0 0" 
           position="0 0 0" 
           scale="0.05 0.05 0.05"
-          /* 3. Add the component and the 'clickable' class */
-          class="clickable"
-          click-handler
           animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
         </a-gltf-model>
+
+        <a-box
+          class="clickable"
+          click-handler
+          position="0 0 0"
+          scale="0.5 0.5 0.5" 
+          material="opacity: 0; transparent: true">
+        </a-box>
       </a-entity>
     </a-scene>
   </body>

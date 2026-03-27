@@ -1,30 +1,160 @@
-<html>
+ <html>
+
   <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+
+    <script>
+
+      // 1. Create the click handler component
+
+      AFRAME.registerComponent('click-handler', {
+
+        init: function () {
+
+          this.el.addEventListener('click', () => {
+
+            // Change this to your desired URL
+
+            window.location.href = "https://www.google.com";
+
+          });
+
+        }
+
+      });
+     
+document.addEventListener("DOMContentLoaded", () => {
+    // Reference the target entity and the button div
+    const sceneEl = document.querySelector('a-scene');
+    const targetEntity = document.querySelector('[mindar-image-target]');
+    const overlayDiv = document.querySelector('#overall-div');
+
+    // When target is found, show the div
+    targetEntity.addEventListener("targetFound", event => {
+      console.log("Target found");
+      overlayDiv.style.display = "block";
+    });
+
+    // When target is lost, hide the div
+    targetEntity.addEventListener("targetLost", event => {
+      console.log("Target lost");
+      overlayDiv.style.display = "none";
+    });
+  });
+    </script>
+<style>
+#app-head{
+ display: flex;
+ flex-direction: row;
+}
+#overall-div {
+  display: none; /* This keeps it hidden initially */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+#overlay {
+  display: inline-block; /* This defines how it looks ONCE shown */
+  background: none; 
+  color: #FFFFFF;
+  text-decoration: none;
+  border: #FFFFFF 5px solid;  
+  padding: 10px 20px;      
+  border-radius: 20px;      
+  font-family: sans-serif;  
+  transition: all 0.3s;     
+}
+#app-head img{
+position: fixed;
+top: 20px;
+left: 80%;
+width: 180px;
+transform: translateX(-60%);
+z-index: 999;
+}
+@media screen and (max-width: 600px) {
+#app-head img{
+top: auto;         
+bottom: 20px;        
+left: 50%;           
+transform: translateX(-50%); 
+width: 100px;
+}
+}
+</style>
   </head>
+
   <body>
-    <a-scene 
-  mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes;" 
-  color-space="sRGB" 
-  renderer="colorManagement: true, lightingPBR: true" 
-  vr-mode-ui="enabled: false" 
-  device-orientation-permission-ui="enabled: false">
+<div id="app-head">
+<div id="overall-div">
+  <a href="https://www.google.com" id="overlay">More Information</a>
+</div>
+ <img src="./th3logo.png"/>
+</div>
+    <a-scene
+
+      mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes; alpha: true;" 
+
+      color-space="sRGB" 
+
+      renderer="colorManagement: true, lightingPBR: true" 
+
+      vr-mode-ui="enabled: false" 
+
+      device-orientation-permission-ui="enabled: false"
+
+      cursor="rayOrigin: mouse"
+
+      raycaster="objects: .clickable">
+
+
       <a-assets>
+
         <img id="card" src="cenario-img.jpg" />
+
         <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
+
       </a-assets>
 
+
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+
       <a-entity mindar-image-target="targetIndex: 0">
+
         <a-gltf-model 
-    src="#avatarModel" 
-    rotation="0 0 0" 
-    position="0 0 0" 
-    scale="0.001 0.001 0.001" 
-    animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> </a-gltf-model>
+
+          id="my-avatar"
+
+          src="#avatarModel" 
+
+          rotation="0 0 0" 
+
+          position="0 0 0" 
+
+          scale="0.05 0.05 0.05"
+
+          class="clickable"
+
+          click-handler
+
+          animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+
+        </a-gltf-model>
+
       </a-entity>
+
     </a-scene>
+
   </body>
-</html>
+
+</html> 

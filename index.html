@@ -28,7 +28,25 @@
         }
 
       });
+     
+document.addEventListener("DOMContentLoaded", () => {
+    // Reference the target entity and the button div
+    const sceneEl = document.querySelector('a-scene');
+    const targetEntity = document.querySelector('[mindar-image-target]');
+    const overlayDiv = document.querySelector('#overall-div');
 
+    // When target is found, show the div
+    targetEntity.addEventListener("targetFound", event => {
+      console.log("Target found");
+      overlayDiv.style.display = "block";
+    });
+
+    // When target is lost, hide the div
+    targetEntity.addEventListener("targetLost", event => {
+      console.log("Target lost");
+      overlayDiv.style.display = "none";
+    });
+  });
     </script>
 <style>
  #overall-div {

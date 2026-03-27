@@ -32,26 +32,27 @@
     </script>
 <style>
  #overall-div {
-      position: fixed;          /* Fica fixo no ecrã, independente do scroll */
-      top: 20px;                /* 20px abaixo do topo */
-      left: 50%;                /* Começa a 50% da largura */
-      transform: translateX(-50%); /* Centra horizontalmente */
-      z-index: 999;             /* Fica sempre por cima de todos os outros elementos */
+      display: none;
+      position: fixed;          
+      top: 20px;               
+      left: 50%;                
+      transform: translateX(-50%); 
+      z-index: 999;             
     }
  #overlay{
-      background: none; /* Fundo preto semi-transparente */
+      background: none; 
       color: #FFFFFF;
       text-decoration: none;
-      border: #FFFFFF 5px;  /* Texto azul ciano */
-      padding: 10px 20px;       /* Espaçamento interno */
-      border-radius: 20px;      /* Cantos arredondados */
-      font-family: sans-serif;  /* Fonte sem serifas */
+      border: #FFFFFF 5px solid;  
+      padding: 10px 20px;      
+      border-radius: 20px;      
+      font-family: sans-serif;  
       font-size: 14px;
       text-align: center;
-      transition: all 0.3s;     /* Animação suave em todas as propriedades ao mudar de estado */
+      transition: all 0.3s;     
  }
  #overlay-a{
-   background: none; /* Fundo preto semi-transparente */
+   background: none; 
    color: #FFFFFF;
    text-decoration: none;
  }
@@ -102,8 +103,6 @@
           position="0 0 0" 
 
           scale="0.05 0.05 0.05"
-
-          /* 3. Add the component and the 'clickable' class */
 
           class="clickable"
 

@@ -5,16 +5,22 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
     <script>
-      // Register the click handler BEFORE the scene loads
       AFRAME.registerComponent('click-handler', {
         init: function () {
+          // Listen for both click and fuse (for some mobile browsers)
           this.el.addEventListener('click', () => {
-            console.log("Target clicked! Redirecting...");
+            alert("Click detected! Redirecting...");
             window.location.href = "https://www.google.com";
           });
         }
       });
     </script>
+    <style>
+      /* Ensure the canvas is the top-most interactive element */
+      .a-canvas {
+        z-index: 10;
+      }
+    </style>
   </head>
   <body>
     <a-scene 
@@ -22,33 +28,30 @@
       color-space="sRGB" 
       renderer="colorManagement: true, lightingPBR: true" 
       vr-mode-ui="enabled: false" 
-      device-orientation-permission-ui="enabled: false">
+      device-orientation-permission-ui="enabled: false"
+      cursor="rayOrigin: mouse"
+      raycaster="objects: .clickable">
 
       <a-assets>
-        <img id="card" src="cenario-img.jpg" />
         <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
       </a-assets>
-
-      <a-entity cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model 
-          id="my-avatar"
           src="#avatarModel" 
           rotation="0 0 0" 
           position="0 0 0" 
-          scale="0.05 0.05 0.05"
-          animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+          scale="0.05 0.05 0.05">
         </a-gltf-model>
 
         <a-box
           class="clickable"
           click-handler
           position="0 0 0"
-          scale="0.5 0.5 0.5" 
-          material="opacity: 0; transparent: true">
+          scale="1 1 1" 
+          material="color: red; opacity: 0.5; transparent: true">
         </a-box>
       </a-entity>
     </a-scene>

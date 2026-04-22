@@ -1,162 +1,107 @@
- <html>
-
-  <head>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-   
-    <link rel="icon" type="image/x-icon" href="./th3logo.png">
-
-
-    <script>
-
-      // 1. Create the click handler component
-
-      AFRAME.registerComponent('click-handler', {
-
-        init: function () {
-
-          this.el.addEventListener('click', () => {
-
-            // Change this to your desired URL
-
-            window.location.href = "https://www.google.com";
-
-          });
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-      });
-     
-document.addEventListener("DOMContentLoaded", () => {
-    // Reference the target entity and the button div
-    const sceneEl = document.querySelector('a-scene');
-    const targetEntity = document.querySelector('[mindar-image-target]');
-    const overlayDiv = document.querySelector('#overall-div');
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
 
-    // When target is found, show the div
-    targetEntity.addEventListener("targetFound", event => {
-      console.log("Target found");
-      overlayDiv.style.display = "block";
-    });
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            width: 90%;
+            max-width: 400px;
+        }
 
-    // When target is lost, hide the div
-    targetEntity.addEventListener("targetLost", event => {
-      console.log("Target lost");
-      overlayDiv.style.display = "none";
-    });
-  });
-    </script>
-<style>
-#app-head{
- display: flex;
- flex-direction: row;
-}
-#overall-div {
-  display: none; /* This keeps it hidden initially */
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-}
+        .logo-container {
+            margin-bottom: 2rem;
+        }
 
-#overlay {
-  display: inline-block; /* This defines how it looks ONCE shown */
-  background: none; 
-  color: #FFFFFF;
-  text-decoration: none;
-  border: #FFFFFF 5px solid;  
-  padding: 10px 20px;      
-  border-radius: 20px;      
-  font-family: sans-serif;  
-  transition: all 0.3s;     
-}
-#app-head img{
-position: fixed;
-top: 20px;
-left: 80%;
-width: 180px;
-transform: translateX(-60%);
-z-index: 999;
-}
-@media screen and (max-width: 600px) {
-#app-head img{
-top: auto;         
-bottom: 20px;        
-left: 50%;           
-transform: translateX(-50%); 
-width: 100px;
-}
-}
-</style>
-  </head>
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 22%; /* App icon style */
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
 
-  <body>
-<div id="app-head">
-<div id="overall-div">
-  <a href="element-details.html" id="overlay">More Information</a>
-</div>
- <img src="./th3logo.png"/>
-</div>
-    <a-scene
+        /* Placeholder logo if no image is found */
+        .logo-placeholder {
+            width: 100px;
+            height: 100px;
+            background: white;
+            color: #764ba2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2rem;
+            border-radius: 22%;
+            margin: 0 auto;
+        }
 
-      mindar-image="imageTargetSrc: ./targets.mind; uiLoading: yes; uiScanning: yes; alpha: true;" 
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
 
-      color-space="sRGB" 
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #764ba2;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-      renderer="colorManagement: true, lightingPBR: true" 
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+        }
 
-      vr-mode-ui="enabled: false" 
+        .cta-button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
 
-      device-orientation-permission-ui="enabled: false"
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo.png" alt="App Logo" class="app-logo" onerror="this.style.display='none'; document.getElementById('fallback').style.display='flex'">
+            
+            <div id="fallback" class="logo-placeholder" style="display: none;">A</div>
+        </div>
 
-      cursor="rayOrigin: mouse"
+        <h1>Welcome to TH3 - Enjoy theatre in all dimensions</h1>
 
-      raycaster="objects: .clickable">
+        <a href="./TH3app.html" class="cta-button">START NOW</a>
+    </div>
 
-
-      <a-assets>
-
-        <img id="card" src="cenario-img.jpg" />
-
-        <a-asset-item id="avatarModel" src="scene.gltf"></a-asset-item>
-
-      </a-assets>
-
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-
-      <a-entity mindar-image-target="targetIndex: 0">
-
-        <a-gltf-model 
-
-          id="my-avatar"
-
-          src="#avatarModel" 
-
-          rotation="0 0 0" 
-
-          position="0 0 0" 
-
-          scale="0.05 0.05 0.05"
-
-          class="clickable"
-
-          click-handler
-
-          animation="property: position; to: 0 0.1 0; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-
-        </a-gltf-model>
-
-      </a-entity>
-
-    </a-scene>
-
-  </body>
-
-</html> 
+</body>
+</html>

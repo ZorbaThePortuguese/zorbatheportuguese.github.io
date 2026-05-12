@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cause:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <title>App Landing Page</title>
     <style>
         * {
@@ -15,14 +15,16 @@
         }
 
         body {
-            font-family: "Limelight", sans-serif;
+            font-family: "Ubuntu", sans-serif;
             /* Your original gradient */
-            background: linear-gradient(135deg, #35090f 0%, #681f16 50%, #a77b1c 100%);
-            height: 100vh;
+            background: linear-gradient(.25turn, #01303f, #02577a, #02a9f7, #89d6fb, #d4f0fc); 
+            background-size: 400% 400%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
+            animation: Animation 25s ease infinite;
         }
 
         .container {
@@ -58,13 +60,13 @@
         }
 
         h1 {
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
+            margin-top: 5vh;
+            font-size: 3rem;
             letter-spacing: 2px;
             /* Cleaned up text shadow for better legibility */
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
             text-transform: uppercase;
-            color: #f8e4b7; /* Slight gold tint for the header */
+            color: #f8f7f4; /* Slight gold tint for the header */
         }
 
         p {
@@ -99,21 +101,220 @@
         .cta-button:active {
             transform: translateY(-1px);
         }
+        .introLine, .oddLine{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100vw;
+        margin-top: 5vh;
+        align-content: center;
+        align-items: center;
+        }
+        .introLine p{
+        font-size: 1.5rem;
+         background: rgba(0,0,0);
+         border-radius: 20px;
+         padding: 20px; 
+         border: #ffffff solid 2px; 
+         width:40vw;
+         height: 20vh;
+        }
+        .introLine img, .oddLine img{
+            width: 20vw;
+        }
+        .oddLine p{
+        font-size: 1.5rem;
+         background: rgb(192, 64, 75);
+         border-radius: 20px;
+         padding: 20px; 
+         border: #ffffff solid 2px;
+         width:40vw;
+         height: 20vh;  
+        }
+        .oddLine a{
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .oddLine a:hover{
+            color: #000000;
+        }
+        table {
+        font-family: Arial, sans-serif;
+        border-collapse: separate; 
+        border-spacing: 0; 
+        width: 100%;
+        max-width: 800px;
+        margin: 20px 0;
+        border-radius: 20px;
+        overflow: hidden; 
+        border: 1px solid #dddddd;
+        }
+        td, th {
+            text-align: left;
+            padding: 12px;
+            border-radius: 20px;
+        }
+
+        tr:nth-child(even) {
+            border-radius: 20px;
+        }
+
+        th {
+            background-color: #000000;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+        }
+
+        .time-col {
+            font-weight: bold;
+            color: #ffffff;
+            width: 20%;
+        }
+                @-webkit-keyframes Animation {
+                0% {
+                    background-position: 10% 0%
+                }
+
+                50% {
+                    background-position: 91% 100%
+                }
+
+                100% {
+                    background-position: 10% 0%
+                }
+            }
+
+            @-moz-keyframes Animation {
+                0% {
+                    background-position: 10% 0%
+                }
+
+                50% {
+                    background-position: 91% 100%
+                }
+
+                100% {
+                    background-position: 10% 0%
+                }
+            }
+
+            @keyframes Animation {
+                0% {
+                    background-position: 10% 0%
+                }
+
+                50% {
+                    background-position: 91% 100%
+                }
+
+                100% {
+                    background-position: 10% 0%
+                }
+            }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-container">
-            <img src="th3logo.png" alt="App Logo" class="app-logo" onerror="this.style.display='none'; document.getElementById('fallback').style.display='flex'">
-            <div id="fallback" class="logo-placeholder" style="display: none;">T3</div>
+        <h1>Welcome to the World of Zorba</h1>
+        <div class="introLine">
+            <img src="./zorbafinal.png" alt="">
+            <p> 
+               Hi! This is a landing page for the world of Zorba.
+               There isn't much here at the moment. But when when the time comes...
+               Who knows.
+            </p>
         </div>
+       
+        <div class="oddLine">
+            <p> 
+               While you are here, you can have a look at Zorba's half-ass AR app. Yes, you just have to click that big button. BUT before you do it you have to download
+            <a href="cenario-img.jpg" download="target_image">this image</a>.
+            </p>
+            <img src="./zorbafinal.png" alt="">
+        </div>
+        <a href="./TH3app.html" class="cta-button">TH3 APP</a>
 
-        <h1>Welcome to TH3</h1>
-        <p>Enjoy theatre in all dimensions</p>
-
-        <a href="./TH3app.html" class="cta-button">START NOW</a>
-    </div>
-
+        <div class="introLine">
+            <img src="./zorbafinal.png" alt="">
+            <p> 
+               Below we can find a random table. It means nothing, but it is there... existing. A bit like all of us.
+            </p>
+        </div>
+        <h2> Zorba's daily routine</h2>
+<table>
+  <tr>
+    <th>Time Slot</th>
+    <th>Activity</th>
+    <th>Focus Area</th>
+  </tr>
+  <tr>
+    <td class="time-col">6:30 AM</td>
+    <td>Wake up, hydrate, and light stretching</td>
+    <td>Physical Health</td>
+  </tr>
+  <tr>
+    <td class="time-col">7:00 AM</td>
+    <td>Deep work or personal project</td>
+    <td>Personal Growth</td>
+  </tr>
+  <tr>
+    <td class="time-col">8:00 AM</td>
+    <td>Breakfast and commute / prep for work</td>
+    <td>Transition</td>
+  </tr>
+  <tr>
+    <td class="time-col">9:00 AM</td>
+    <td>"Frog Task" (Hardest task of the day)</td>
+    <td>Productivity</td>
+  </tr>
+  <tr>
+    <td class="time-col">11:00 AM</td>
+    <td>Meetings, emails, and admin</td>
+    <td>Collaboration</td>
+  </tr>
+  <tr>
+    <td class="time-col">12:30 PM</td>
+    <td>Lunch break (away from screen)</td>
+    <td>Recovery</td>
+  </tr>
+  <tr>
+    <td class="time-col">1:30 PM</td>
+    <td>Secondary tasks and creative work</td>
+    <td>Productivity</td>
+  </tr>
+  <tr>
+    <td class="time-col">3:30 PM</td>
+    <td>Quick walk or coffee break</td>
+    <td>Mental Reset</td>
+  </tr>
+  <tr>
+    <td class="time-col">4:00 PM</td>
+    <td>Final wrap-up and planning</td>
+    <td>Organization</td>
+  </tr>
+  <tr>
+    <td class="time-col">5:30 PM</td>
+    <td>Physical exercise or gym session</td>
+    <td>Physical Health</td>
+  </tr>
+  <tr>
+    <td class="time-col">7:00 PM</td>
+    <td>Dinner and social/family time</td>
+    <td>Connection</td>
+  </tr>
+  <tr>
+    <td class="time-col">9:00 PM</td>
+    <td>Digital sunset and reading</td>
+    <td>Wind-down</td>
+  </tr>
+  <tr>
+    <td class="time-col">10:30 PM</td>
+    <td>Lights out</td>
+    <td>Rest</td>
+  </tr>
+</table>
 </body>
 </html>
